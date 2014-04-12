@@ -83,13 +83,7 @@ $(function(){
 			$('.modal > .content > .next').show(0);
 		}
 	}
-	//$.getJSON( "/videos", {
-    //	tags: "mount rainier",
-    //	tagmode: "any",
-    //	format: "json"
-  	//})
-    //.done(function( data ) {
-    //	showVines(data);
-    //});
-  	showVines(firstVideos);
+	$.getJSON( "/videos").done(function( data ) {
+    	showVines(data);
+    });
 });
