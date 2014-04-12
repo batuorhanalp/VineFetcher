@@ -1,0 +1,27 @@
+extends ../layouts/default
+
+block main
+  h1 list users
+
+block content
+  h2 Admin List
+  ul 
+    for user in users
+      li 
+        span Name: #{ user.name }
+        span Email: #{ user.email }
+        form(action="/users/delete", method="post")
+          input(type='hidden', name='_csrf', value="#{csrf_token}")
+          input(type='hidden', name='userId', value="#{user.id}")
+          button(type='submit') delete
+    else
+      li no user
+
+  h2 Create new admin
+    form(action='/admin/create', method='post')
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
+      input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)
+      input#username.form-control(type='text', name="username", placeholder='Username', value=user.username)
+      input#password.form-control(type='password', name="password", placeholder='Password')
+      button.btn.btn-primary(type='submit') Register
