@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
 
   // admin pages
   app.get('/admin', requiresLogin, admin.index);
-  app.post('/admin/video/save', admin.approve);
+  app.post('/admin/video/approve', admin.approve);
   app.post('/admin/video/delete', admin.disapprove);
   app.get('/admin/video/ids', requiresLogin, admin.approved);
 
