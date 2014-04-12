@@ -1,11 +1,16 @@
 {
-  "name": "node-express-mongoose",
-  "description": "A boilerplate application for express mongoose",
+  "name": "vine-fetcher",
+  "description": "An app that fetches videos from vine and display approved ones to user",
   "version": "0.0.1",
-  "author": {
-    "name": "Madhusudhan Srinivasa",
-    "email": "me@madhums.me"
+  "author": [
+  {
+    "name": "Suleyman Melikoglu",
+    "email": "suleyman@katu.com.tr"
   },
+  {
+    "name": "Batu Orhanalp",
+    "email": "batu@katu.com.tr"
+  }],
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
