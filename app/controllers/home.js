@@ -13,7 +13,7 @@ exports.index = function (req, res) {
 
 exports.videos = function (req, res) {
   var page = req.param('page', 1);
-  var itemPerPage = 3;
+  var itemPerPage = 20;
   var startFrom = (page - 1) * itemPerPage;
 
   res.set('Connection', 'close');

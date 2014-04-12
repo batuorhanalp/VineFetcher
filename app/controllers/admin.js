@@ -83,19 +83,36 @@ exports.approve = function (req, res) {
 };
 
 /**
+ * Removes an approved video
+ *
+ * Accepts HTTP post params
+ */
+exports.disapprove = function (req, res) {
+  var videoId = req.param('videoId');
+
+  Video.findOneAndRemove({ 'videoId': videoId }, function(err, video) {
+    if (err) return res.json({ 'error': 'an error occurred' });
+    return res.json({ 'status': 'success' });
+  });
+};
+
+/**
  * Returns approved video ids
  */
 exports.approved = function(req, res) {
   res.set('Connection', 'close');
 
-  Video.find(function(err, videos) {
-    if (err) return res.json({ 'error': 'an error occurred' });
-    
-    // populate video ids
-    var ids = new Array();
-    for (var index in videos) {
-      ids.push(videos[index].videoId);
-    }
-    res.json(ids);
-  });
+  Video
+    .find()
+    .select('videoId')
+    .exec(function(err, videos) {
+      if (err) return res.json({ 'error': 'an error occurred' });
+      
+      // populate video ids
+      var ids = new Array();
+      for (var index in videos) {
+        ids.push(videos[index].videoId);
+      }
+      res.json(ids);
+    });
 };
