@@ -3,14 +3,15 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var passportOptions = {
   failureFlash: 'Invalid email or password.',
   failureRedirect: '/login'
-}
+};
 
 // controllers
-var home = require('home')
+var home = require('home');
+var admin = require('admin');
 
 /**
  * Expose
@@ -18,6 +19,8 @@ var home = require('home')
 
 module.exports = function (app, passport) {
 
-  app.get('/', home.index)
+  app.get('/', home.index);
+  app.get('/admin', admin.index);
+  app.get('/admin/:tag', admin.videos);
 
-}
+};

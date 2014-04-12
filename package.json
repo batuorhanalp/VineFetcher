@@ -27,7 +27,8 @@
     "view-helpers": "*",
     "jade": "*",
     "async": "*",
-    "forever": "*"
+    "forever": "*",
+    "request": "*"
   },
   "devDependencies": {
     "nodemon": "*",
