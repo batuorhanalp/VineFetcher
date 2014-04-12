@@ -25,6 +25,6 @@ exports.videos = function (req, res) {
     .skip(startFrom)
     .exec(function(error, videos) {
       if (error) throw error;
-      res.json(videos);
+      res.json({ records: videos });
     });
 };

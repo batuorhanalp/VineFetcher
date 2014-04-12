@@ -40,8 +40,8 @@ module.exports = function (app, passport) {
           failureRedired: '/admin/login' 
         }));
   app.get('/admin/logout', admin.logout);
-  app.get('/admin/create-admin', admin.createAdmin);
-  app.post('/admin/create-admin', admin.createAdminPost);
+  app.get('/admin/create', admin.createAdmin);
+  app.post('/admin/create', admin.createAdminPost);
 
   // admin pages
   app.get('/admin', requiresLogin, admin.index);

@@ -46,7 +46,7 @@ exports.createAdminPost = function (req, res) {
       });
     }
 
-    return res.redirect('/admin');
+    return res.redirect('/users');
   });
 };
 
