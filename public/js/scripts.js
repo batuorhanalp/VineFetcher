@@ -57,7 +57,6 @@ $(function(){
 		    })
 		    .fail(function(){
 		    	page--;
-		    	alert("Can't get Vines");
 		    });
 	    }
 	});

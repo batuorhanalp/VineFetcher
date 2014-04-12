@@ -4,12 +4,15 @@ body { background: url(../images/BG_Pattern.png); font-family: 'Source Sans Pro'
 .header {width: 940px; height: 315px; display: block; margin-left: 10px; background: url(../images/header.png) no-repeat;}
 .logo { background: url(../images/karbonat.png) no-repeat; position: fixed; right: 0;width: 20px;height: 61px;display: block; margin-top: 335px;} 
 .item {margin: 20px 0 0 10px; width: 170px; height: 230px; display: block; float: left;background: #FFF; padding: 5px}
+.item.long { height: 270px;}
 .item .thumbnail { width: 170px; height: 170px; margin-bottom: 5px;}
 .item .thumbnail a { background: url(../images/play.png) no-repeat; display: block; width: 170px; height: 170px;}
 .item .thumbnail a:hover { background-position: 0 -170px; }
-.item .title { color: #64b189;float: left; width: 140px;}
+.item .title { color: #64b189;float: left; width: 140px;overflow: hidden;}
 .item .time { color: #cfcfcf;float: left;width: 30px;text-align: right;}
-.item .description {color: #464646; font-size: 13px; font-weight: normal;line-height: 17px; margin-top: 24px;}
+.item .description {color: #464646; font-size: 13px; font-weight: normal;line-height: 17px; margin-top: 24px;overflow: hidden;width: 170px;height: 57px;}
+.item .approve {width: 78px; color: #64b189;font-size: 17px;margin-left: 48px;border: none;outline: none;background: none;cursor: pointer;font-weight: bold;}
+.item .approve.delete {color: #b30000;}
 .modal { display: none; position: absolute; background: url(../images/modal_bg.png); width: 100%; height: 100%;overflow: hidden;left: 0%; top: 0%;}
 .modal .background { width: 100%;height: 100%;left: 0%;top: 0%;position: absolute;display: block;z-index: 100;}
 .modal .content {width: 550px;height: 680px;background: #FFF;padding: 0;margin: auto;position: relative;z-index: 1001;margin-top: 2%;}
@@ -23,7 +26,8 @@ body { background: url(../images/BG_Pattern.png); font-family: 'Source Sans Pro'
 .modal .content .previous { position: absolute; background: url(../images/arrows.png) 0 0; width: 48px;height: 83px; z-index: 100000; margin-left: -62px;top: 295px;}
 .modal .content .next { position: absolute; background: url(../images/arrows.png) -48px 0; width: 48px;height: 83px; z-index: 100000; margin-left: 431px;top: 295px;}
 .modal .content .next.wide {margin-left: 564px}
-.modal .content .info .share .approve {background: url(../images/check.png) no-repeat; width: 125px; height: 40px; /* display: block; */ float: left; color: #64b189; text-decoration: none;padding-left: 45px; line-height: 40px; font-size: 23px; margin-left: 202px; position: absolute;border: none;outline: none;}
+.modal .content .info .share .approve {background: url(../images/check.png) no-repeat; width: 130px; height: 40px; float: left; color: #64b189; text-decoration: none;padding-left: 45px; line-height: 40px; font-size: 23px; margin-left: 202px; position: absolute;border: none;outline: none;cursor: pointer;}
+.modal .content .info .share .approve.delete {background: url(../images/trash.png) no-repeat; color: #b30000;}
 .search {position: fixed;padding-left: 40px;padding-top: 15px;background: url(../images/modal_bg.png);width: 100%;padding-bottom: 10px;}
 .search input[type=text]{border: 1px solid;outline: none;padding: 5px;color: #fefefe;font-weight: bold;font-size: 14px;background: url(../images/modal_bg.png);}
 .search input[type=button]{padding: 6px;border: none;color: #004b39;background-color: #efefef;font-weight: bold;width: 100px;}
