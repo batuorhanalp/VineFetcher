@@ -38,12 +38,12 @@ module.exports = function (app, passport) {
           successRedirect: '/admin', 
           failureRedired: '/admin/login' 
         }));
-
-  // admin pages
   app.get('/admin/logout', admin.logout);
-  app.get('/admin', requiresLogin, admin.index);
   app.get('/admin/create-admin', admin.createAdmin);
   app.post('/admin/create-admin', admin.createAdminPost);
+
+  // admin pages
+  app.get('/admin', requiresLogin, admin.index);
   app.post('/admin/approve-video', requiresLogin,  admin.approve);
   app.get('/admin/approved-videos', requiresLogin, admin.approved);
 
