@@ -19,6 +19,8 @@ exports.authCallback = function (req, res) {
  * @url: /admin/login
  */
 exports.login = function (req, res) {
+  if (req.isAuthenticated())
+    return res.redirect('/admin');
   res.render('admin/login');
 };
 
@@ -71,14 +73,29 @@ exports.approve = function (req, res) {
 
   res.set("Connection", "close");
 
-  if(!videoJson) {
-    res.json({ error: "No input" });
-    return;
-  }
+  if(!videoJson) 
+    return res.json({ error: "No input" });
 
   var video = new Video(videoJson);
   video.save(function(err, done) {
     res.json({ 'status': 'success' });
   });
+};
 
+/**
+ * Returns approved video ids
+ */
+exports.approved = function(req, res) {
+  res.set('Connection', 'close');
+
+  Video.find(function(err, videos) {
+    if (err) return res.json({ 'error': 'an error occurred' });
+    
+    // populate video ids
+    var ids = new Array();
+    for (var index in videos) {
+      ids.push(videos[index].videoId);
+    }
+    res.json(ids);
+  });
 };
