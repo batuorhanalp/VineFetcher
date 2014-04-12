@@ -10,8 +10,9 @@ var passportOptions = {
 };
 
 // controllers
-var home = require('home');
-var admin = require('admin');
+var home = require('home'),
+    admin = require('admin'),
+    users = require('users');
 
 // middlewares
 var requiresLogin = function(req, res, next) {
@@ -44,7 +45,11 @@ module.exports = function (app, passport) {
 
   // admin pages
   app.get('/admin', requiresLogin, admin.index);
-  app.post('/admin/save-video', admin.approve);
-  app.post('/admin/delete-video', admin.disapprove);
-  app.get('/admin/video-ids', requiresLogin, admin.approved);
+  app.post('/admin/video/save', admin.approve);
+  app.post('/admin/video/delete', admin.disapprove);
+  app.get('/admin/video/ids', requiresLogin, admin.approved);
+
+  // user pages
+  app.get('/users', requiresLogin, users.index);
+  app.post('/users/delete', requiresLogin, users.deleteUser);
 };
