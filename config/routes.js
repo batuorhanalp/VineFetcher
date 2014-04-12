@@ -10,24 +10,29 @@ var passportOptions = {
 };
 
 // controllers
-var home = require('home');
-var admin = require('admin');
+var home = require('home'),
+    admin = require('admin'),
+    users = require('users');
+
+// middlewares
+var requiresLogin = function(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  if (req.method == "GET") req.session.returnTo = req.originalUrl;
+  res.redirect('/admin/login');
+};
+
 
 /**
  * Expose
  */
-
 module.exports = function (app, passport) {
 
+  // public pages
   app.get('/', home.index);
   app.get('/videos', home.videos);
 
-  // admin pages
-  app.get('/admin', admin.index);
+  // auth pages
   app.get('/admin/login', admin.login);
-  app.get('/admin/create-admin', admin.createAdmin);
-  app.post('/admin/create-admin', admin.createAdminPost);
-  app.post('/admin/approve', admin.approve);
   app.post('/admin/login', passport.authenticate(
         'local', 
         { 
@@ -35,5 +40,16 @@ module.exports = function (app, passport) {
           failureRedired: '/admin/login' 
         }));
   app.get('/admin/logout', admin.logout);
+  app.get('/admin/create-admin', admin.createAdmin);
+  app.post('/admin/create-admin', admin.createAdminPost);
 
+  // admin pages
+  app.get('/admin', requiresLogin, admin.index);
+  app.post('/admin/video/save', admin.approve);
+  app.post('/admin/video/delete', admin.disapprove);
+  app.get('/admin/video/ids', requiresLogin, admin.approved);
+
+  // user pages
+  app.get('/users', requiresLogin, users.index);
+  app.post('/users/delete', requiresLogin, users.deleteUser);
 };
