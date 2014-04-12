@@ -22,3 +22,8 @@ body { background: url(../images/BG_Pattern.png); font-family: 'Source Sans Pro'
 .modal .content .share a { background: url(../images/link.png) no-repeat; width: 100px; height: 26px; display: block;float: left; color: #64b189; text-decoration: none;padding-left: 23px; line-height: 23px;}
 .modal .content .previous { position: absolute; background: url(../images/arrows.png) 0 0; width: 48px;height: 83px; z-index: 100000; margin-left: -62px;top: 295px;}
 .modal .content .next { position: absolute; background: url(../images/arrows.png) -48px 0; width: 48px;height: 83px; z-index: 100000; margin-left: 431px;top: 295px;}
+.modal .content .next.wide {margin-left: 564px}
+.modal .content .info .share .approve {background: url(../images/check.png) no-repeat; width: 125px; height: 40px; /* display: block; */ float: left; color: #64b189; text-decoration: none;padding-left: 45px; line-height: 40px; font-size: 23px; margin-left: 202px; position: absolute;border: none;outline: none;}
+.search {position: fixed;padding-left: 40px;padding-top: 15px;background: url(../images/modal_bg.png);width: 100%;padding-bottom: 10px;}
+.search input[type=text]{border: 1px solid;outline: none;padding: 5px;color: #fefefe;font-weight: bold;font-size: 14px;background: url(../images/modal_bg.png);}
+.search input[type=button]{padding: 6px;border: none;color: #004b39;background-color: #efefef;font-weight: bold;width: 100px;}
