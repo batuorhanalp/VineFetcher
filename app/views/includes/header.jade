@@ -1,3 +1,9 @@
 header
   h1
     a(href="/")= pkg.name
+
+  if req.isAuthenticated()
+    div Merhaba #{ req.user.name } 
+    a(href="/admin/logout") cikis yap
+  else
+    a(href="/admin/login") giris yap

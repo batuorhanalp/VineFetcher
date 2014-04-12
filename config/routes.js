@@ -33,6 +33,7 @@ module.exports = function (app, passport) {
         { 
           successRedirect: '/admin', 
           failureRedired: '/admin/login' 
-        }), admin.authCallback);
+        }));
+  app.get('/admin/logout', admin.logout);
 
 };

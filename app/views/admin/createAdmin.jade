@@ -1,9 +1,13 @@
-h1 Register a new admin
+extends ../layouts/default
 
-form(action='/admin/create-admin', method='post')
-  input(type='hidden', name='_csrf', value="#{csrf_token}")
-  input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
-  input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)
-  input#username.form-control(type='text', name="username", placeholder='Username', value=user.username)
-  input#password.form-control(type='password', name="password", placeholder='Password')
-  button.btn.btn-primary(type='submit') Register
+block main
+  h1 Register a new admin
+
+block content
+  form(action='/admin/create-admin', method='post')
+    input(type='hidden', name='_csrf', value="#{csrf_token}")
+    input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
+    input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)
+    input#username.form-control(type='text', name="username", placeholder='Username', value=user.username)
+    input#password.form-control(type='password', name="password", placeholder='Password')
+    button.btn.btn-primary(type='submit') Register

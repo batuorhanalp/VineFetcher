@@ -22,6 +22,11 @@ exports.login = function (req, res) {
   res.render('admin/login');
 };
 
+exports.logout = function (req, res) {
+  req.logout();
+  res.redirect('/admin');
+};
+
 exports.createAdmin = function (req, res) {
   res.render('admin/createAdmin', {
     user: new User()  
