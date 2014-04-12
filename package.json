@@ -1,0 +1,42 @@
+{
+  "name": "node-express-mongoose",
+  "description": "A boilerplate application for express mongoose",
+  "version": "0.0.1",
+  "author": {
+    "name": "Madhusudhan Srinivasa",
+    "email": "me@madhums.me"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "start": "NODE_PATH=./app/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "test": "make test"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "express-namespace": "*",
+    "mongoose": "*",
+    "mongoose-user": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "winston": "*",
+    "connect-mongo": "*",
+    "connect-flash": "*",
+    "view-helpers": "*",
+    "jade": "*",
+    "async": "*",
+    "forever": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*",
+    "mocha": "*",
+    "should": "*",
+    "supertest": "*"
+  },
+  "keywords": [
+    "mvc",
+    "boilerplate"
+  ]
+}
