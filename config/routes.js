@@ -22,6 +22,6 @@ module.exports = function (app, passport) {
   app.get('/', home.index);
   app.get('/videos', home.videos);
   app.get('/admin', admin.index);
-  app.get('/admin/:tag', admin.videos);
+  app.post('/admin/approve', admin.approve);
 
 };

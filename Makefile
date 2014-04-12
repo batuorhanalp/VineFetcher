@@ -8,7 +8,7 @@ test:
     $(TESTS)
 
 testdebug:
-	@NODE_ENV=test NODE_PATH=./app/controllers ./node_modules/.bin/mochaha debug \
+	@NODE_ENV=test NODE_PATH=./app/controllers ./node_modules/.bin/mocha debug \
 		--reported $(REPORTER) \
 		--ui bdd \
 		$(TESTS)

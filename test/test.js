@@ -20,13 +20,12 @@ describe.skip('Users', function () {
   })
 })
 
-describe('Videos', function() {
+describe('Home', function() {
   beforeEach(function (done) {
     var video1 = new Video({
       videoId:  6,
       thumbnailUrl: "http://mythumb.com/image.png",
       permalink: "http://www.google.com",
-      videoUrl: "http://www.google.com/video.mkv",
       username: "Ali Koc",
       description: "Super bi video",
       created: Date.now(),
@@ -38,7 +37,6 @@ describe('Videos', function() {
       videoId: 7,
       thumbnailUrl: "http://mythumb.com/image2.png",
       permalink: "http://www.google.com",
-      videoUrl: "http://www.google.com/video2.mkv",
       username: "Batu Orhanalp",
       description: "Bu daha Super bi video",
       created: Date.now(),
@@ -61,4 +59,41 @@ describe('Videos', function() {
     Video.collection.remove(done);
   });
 
+});
+
+
+describe("Admin", function() {
+  describe("POST /admin/approve", function(done) {
+    var postData = {
+      videoId: 3,
+      thumbnailUrl: "http://mythumb.com/image.png",
+      permalink: "http://www.google.com",
+      username: "Ali Koc",
+      description: "Super bi video",
+      created: Date.now(),
+      tag: "Dominos"
+    };
+
+    request(app)
+      .post('/admin/approve')
+      .send(postData)
+      .set('Accept', 'application/json')
+      .end(function(err, res) {
+        should.not.exist(err);
+        res.should.have.status(200);
+        var body = JSON.parse(res.body);
+        res.body.should.be.equal({ 'status': 'success' });
+        console.log(res.body);
+
+        Video.find(function(err, videos) {
+          videos.length.should.be.equal(1);
+          videos[0].videoId.should.be.equal(3);
+          done();
+        });
+      });
+  });
+
+  afterEach(function (done) {
+    Video.collection.remove(done);
+  });
 });

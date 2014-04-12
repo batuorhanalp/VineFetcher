@@ -92,6 +92,7 @@ module.exports = function (app, passport) {
     app.use(helpers(pkg.name))
 
     // adds CSRF support
+    /*
     if (process.env.NODE_ENV !== 'test') {
       app.use(express.csrf())
 
@@ -101,6 +102,7 @@ module.exports = function (app, passport) {
         next()
       })
     }
+    */
 
     // routes should be at the last
     app.use(app.router)

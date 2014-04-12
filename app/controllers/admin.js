@@ -2,7 +2,8 @@
 /*
  * Module dependencies.
  */
-var request = require('request');
+var mongoose = require('mongoose'),
+    Video = mongoose.model('Video');
 
 /**
  * The initial admin page with no video displaying
@@ -17,36 +18,24 @@ exports.index = function (req, res) {
 };
 
 /**
- * Tag/Video service
+ * Admin approves the video via posting to this controller
  *
- * @url: /admin/:tag
+ * @url: /admin/approve
  */
-exports.videos = function (req, res) {
-  var page = req.param('page', 1);
-  var tag = req.param('tag');
+exports.approve = function (req, res) {
+  // params
+  var videoJson = req.body;
 
-  // this page only returns json
-  res.set('ContentType', 'application/json');
+  res.set("Connection", "close");
 
-  // fetch videos from vine
-  request.get("https://api.vineapp.com/timelines/tags/" + tag, function(error, response, body) {
-    if (error) {
-      res.json({ error: "An error occurred" });
-      return;
-    };
+  if(!videoJson) {
+    res.json({ error: "No input" });
+    return;
+  }
 
-    // convert the response to json
-    var json = JSON.parse(body);
-
-    // check if it is successful
-    if (!json.success) {
-      res.json({ error: "Couldn't fetch videos" });
-      return;
-    }
-
-    var records = json.data.records;
-    res.json(records);
-    res.end();
+  var video = new Video(videoJson);
+  video.save(function(err, done) {
+    res.json({ 'status': 'success' });
   });
 
 };
