@@ -23,5 +23,11 @@ module.exports = function (app, passport) {
   app.get('/videos', home.videos);
   app.get('/admin', admin.index);
   app.post('/admin/approve', admin.approve);
+  app.login('/login', passport.authenticate(
+        'local', 
+        { 
+          successRedirect: '/admin', 
+          failureRedired: '/login' 
+        }));
 
 };
