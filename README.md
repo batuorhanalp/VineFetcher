@@ -1,6 +1,21 @@
 VineFetcher
 ===========
 
+VineFetcher is a web app that fetches vine videos from its api and displays them.
+It also has an administration back-end to approve the videos that are displayed.
+
+
+Installation
+------------
+
+Install dependencies
+
+  $ npm install
+
+Start the server. See `package.json` for the start script.
+
+  $ npm start
+
 
 POST /admin/video/approve
 -------------------------
@@ -12,6 +27,12 @@ JSON data must be post as the request body. See following example:
     --data '{"videoId": 6,"thumbnailUrl": "http://mythumb.com/image.png",
         "permalink": "http://www.google.com","username": "Ali Koc","description": "Super bi video",
         "created": "2014-04-12T11:49:02.793Z","tag": "Dominos"}' http://localhost:3000/admin/video/approve
+
+Return on success:
+  {"status": "success"}
+
+Return on failure:
+  {"error": "an error occurred"}
 
 POST /admin/video/delete
 ------------------------
@@ -38,21 +59,21 @@ Params:
 
 Example Response: 
 
-{
-  "records": [
   {
-    "videoId": 6,
-    "thumbnailUrl": "http://mythumb.com/image.png",
-    "permalink": "http://www.google.com",
-    "username": "Ali Koc",
-    "description": "Super bi video",
-    "created": "2014-04-12T11:49:02.793Z",
-    "tag": "Dominos",
-    "_id": "5349282e5dbdd63b832c4a99",
-    "__v": 0
+    "records": [
+    {
+      "videoId": 6,
+      "thumbnailUrl": "http://mythumb.com/image.png",
+      "permalink": "http://www.google.com",
+      "username": "Ali Koc",
+      "description": "Super bi video",
+      "created": "2014-04-12T11:49:02.793Z",
+      "tag": "Dominos",
+      "_id": "5349282e5dbdd63b832c4a99",
+      "__v": 0
+    }
+    ]
   }
-  ]
-}
 
 GET /admin/video/ids
 --------------------
