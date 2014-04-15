@@ -8,6 +8,8 @@ It also has an administration back-end to approve the videos that are displayed.
 Installation
 ------------
 
+Install node.js. Follow instructions for ubuntu server: http://ariejan.net/2011/10/24/installing-node-js-and-npm-on-ubuntu-debian/
+
 Install dependencies
 
     $ npm install
