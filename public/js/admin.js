@@ -36,6 +36,7 @@ $(function(){
 			$('.background').click(function(){
 				$('.modal').hide(250);
 				$('body').css('overflow', 'visible');
+				$('.modal > .content > .video').html('');
 			});
 		});
 	}		    	
