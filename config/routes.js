@@ -39,14 +39,14 @@ module.exports = function (app, passport) {
           successRedirect: '/admin', 
           failureRedired: '/admin/login' 
         }));
-  app.get('/admin/logout', admin.logout);
-  app.get('/admin/create', admin.createAdmin);
-  app.post('/admin/create', admin.createAdminPost);
+  app.get('/admin/logout', requiresLogin, admin.logout);
+  app.get('/admin/create', requiresLogin, admin.createAdmin);
+  app.post('/admin/create', requiresLogin, admin.createAdminPost);
 
   // admin pages
   app.get('/admin', requiresLogin, admin.index);
-  app.post('/admin/video/approve', admin.approve);
-  app.post('/admin/video/delete', admin.disapprove);
+  app.post('/admin/video/approve', requiresLogin, admin.approve);
+  app.post('/admin/video/delete', requiresLogin, admin.disapprove);
   app.get('/admin/video/ids', requiresLogin, admin.approved);
 
   // user pages
