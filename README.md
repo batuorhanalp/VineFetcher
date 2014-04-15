@@ -16,6 +16,21 @@ Start the server. See `package.json` for the start script.
 
     $ npm start
 
+Deployment
+----------
+
+There are several ways to deploy node.js on linux server. A simple solution is to run it on the background
+
+    nohup npm start > output.log &
+
+but a better way is to deploy it using `forever` (https://github.com/nodejitsu/forever)
+
+    [sudo] npm install forever -g
+    forever start /usr/local/npm start
+
+to see its process issue `forever list`. To kill the process
+
+    forever stop 0
 
 POST /admin/video/approve
 -------------------------
