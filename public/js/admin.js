@@ -19,7 +19,7 @@ $(function(){
 						lowButton = '<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + postId + ', this)"/>';
    					}
 				});
-				$('.wrapper').append('<div class="item long" id="' + postId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description">' + this.description + '</div>' + lowButton + '</div>');
+				$('.wrapper').append('<div class="item long" id="' + postId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description long">' + this.description + '</div>' + lowButton + '</div>');
 
 		    	vines.push(newVine);
 		    });
