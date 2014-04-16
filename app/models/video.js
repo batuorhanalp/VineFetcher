@@ -16,7 +16,8 @@ var VideoSchema = new Schema({
   username: { type: String },
   description: { type: String },
   created: { type: Date },
-  tag: { type: String }
+  tag: { type: String },
+  order: { type: Number, default: 0 }
 });
 
 /**

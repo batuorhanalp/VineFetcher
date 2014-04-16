@@ -23,6 +23,7 @@ exports.videos = function (req, res) {
     .find()
     .limit(itemPerPage)
     .skip(startFrom)
+    .sort("-order")
     .exec(function(error, videos) {
       if (error) throw error;
       res.json({ records: videos });
