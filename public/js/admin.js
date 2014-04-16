@@ -1,11 +1,36 @@
 var vines;
 $(function(){
 	vines = new Array();
+	savedVines = new Array();
 	var selectedVine;
 	var previousVineId;
 	var vineCounter = 0;
 	var page = 1;
 	var savedPostIds;
+	function showSavedVines(vinesData){
+		$(vinesData.records).each(function(){
+			if(this.videoId !== undefined){
+				var lowButton = '<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + this.videoId + ', this)"/>';
+				$('.wrapper').append('<div class="item long" id="' + this.videoId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description long">' + this.description + '</div>' + lowButton + '</div>');
+		    	vines.push(this);
+		    }
+		});
+		$('.thumbnail').click(function(){
+			$('.modal').show(250);	
+			var videoId = $(this).parent().attr('id');
+			$.grep(vines, function (item) {
+   				if(item.videoId == videoId){
+   					vineCounter = vines.indexOf(item);
+		  			changeVine(item, vineCounter);
+   				}
+			});	 		
+		});
+		$('.background').click(function(){
+			$('.modal').hide(250);
+			$('body').css('overflow', 'visible');
+			$('.modal > .content > .video').html('');
+		});
+	}	
 	function showVines(vinesData){
 		$.getJSON( "/admin/video/ids").done(function(data) {
     		savedPostIds = data;
@@ -147,6 +172,9 @@ $(function(){
 	    }
 	    return objects;
 	}
+	$.getJSON( "/videos").done(function(data) {
+    	showSavedVines(data);
+    });
 });
 	function approveVine(vineVideo, button){
 		var vineData = JSON.stringify(vines[vineVideo]);
