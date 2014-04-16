@@ -4,28 +4,42 @@ $(function(){
 	var previousVineId;
 	var vineCounter = 0;
 	var page = 1;
-	function showVines(vinesData){
+	var videoToShowOnStart = 0;
+	function showVines(vinesData, onload){
 		$(vinesData.records).each(function(){
 			if(this.videoId !== undefined){
-		    	$('.wrapper').append('<div class="item" id="' + this.videoId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description">' + this.description + '</div></div>');
+		    	$('.wrapper').append('<div class="item" id="' + this.videoId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#!/' + this._id + '"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description">' + this.description + '</div></div>');
 		    	vines.push(this);
+		    	if(window.location.hash) {
+					var video = window.location.hash.substring(1).replace('!/','');
+					if(this._id == video){
+						videoToShowOnStart = this.videoId;
+					}	
+				}
+				vineCounter++;
 		    }
 		});
 		$('.thumbnail').click(function(){
-			$('.modal').show(250);	
 			var videoId = $(this).parent().attr('id');
-			$.grep(vines, function (item) {
-   				if(item.videoId == videoId){
-   					vineCounter = vines.indexOf(item);
-		  			changeVine(item, vineCounter);
-   				}
-			});	 		
+			showModal(videoId);
 		});
 		$('.background').click(function(){
 			$('.modal').hide(250);
 			$('body').css('overflow', 'visible');
 			$('.modal > .content > .video').html('');
 		});
+		if(onload){
+			showModal(videoToShowOnStart);
+		}
+	}
+	function showModal(videoId){
+		$('.modal').show(250);	
+			$.grep(vines, function (item) {
+   				if(item.videoId == videoId){
+   					vineCounter = vines.indexOf(item);
+		  			changeVine(item, vineCounter);
+   				}
+			});
 	}		    	
 	$('.background').click(function(){
 		$('.modal').hide(250);
@@ -46,7 +60,7 @@ $(function(){
 		    	format: "json"
 		  	})
 		    .done(function( data ) {
-		    	showVines(data);
+		    	showVines(data, false);
 		    })
 		    .fail(function(){
 		    	page--;
@@ -75,8 +89,12 @@ $(function(){
 		else{
 			$('.modal > .content > .next').show(0);
 		}
+		window.location.hash = '#!/' + vine._id;
+		//$('.twitter').html('https://twitter.com/share?url=' + window.location);
+		$.getScript("http://platform.twitter.com/widgets.js"); 
+		//$('#fbShare').attr('data-href', url);
 	}
 	$.getJSON( "/videos").done(function( data ) {
-    	showVines(data);
+    	showVines(data, true);
     });
 });

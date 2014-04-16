@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 	<title>Vine Fetcher</title>
 	<meta charset="UTF-8" />
@@ -10,26 +10,35 @@
 	<script src="js/scripts.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1481370305425695";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<a href="http://www.karbonat.com" title="Karbonat" class="logo" target="_blank"></a>
 	<div class="modal">
 		<div class="content">
-			<a href="#" class="previous" title="Previous Vine"></a>
+			<a class="previous" title="Previous Vine"></a>
 			<div class="video"></div>
 			<div class="info">
 				<span class="title"></span><span class="time"></span>
 				<span class="description"></span>
 				<div class="share">
 					<a href="#" class="permalink" target="_blank" title="">Sayfasına git</a>
-					<span class="facebook">Facebook</span>
-  					<span class="twitter">Twitter</span>
+					<span class="facebook"><fb:share-button href="http://localhost:3000/#!/534cf3436b4f9a7894eb4177" type="button_count"></fb:share-button></span>
+  					<span class="twitter"><a href="https://twitter.com/share?url=local" class="twitter-share-button" data-lang="en">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></span>
 				</div>
 			</div>
-			<a href="#" class="next" title="Next Vine"></a>
+			<a class="next" title="Next Vine"></a>
 		</div>
 		<div class="background"></div>
 	</div>
 	<div class="wrapper">
 		<div class="header"></div>
 	</div>
+	<fb:share-button href="http://localhost:3000/#!/534cf3436b4f9a7894eb4177" type="button_count"></fb:share-button>
 </body>
 </html>
