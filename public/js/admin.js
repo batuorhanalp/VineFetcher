@@ -199,6 +199,9 @@ $(function(){
     });
     function approveVine(vineVideo, button){
 		var vineData = JSON.stringify(vines[vineVideo]);
+		if(vines[vineVideo]._id != undefined){
+			vineData = JSON.stringify({ videoId:vines[vineVideo].videoId, thumbnailUrl: vines[vineVideo].thumbnailUrl, permalink: vines[vineVideo].shareUrl, username: vines[vineVideo].username, description: vines[vineVideo].description, created: vines[vineVideo].created, tag:vines[vineVideo].searchedTag });
+		}
 		$.ajax({
 			url:'/admin/video/approve',
 			type: 'POST',
