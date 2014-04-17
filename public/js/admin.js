@@ -87,7 +87,7 @@ $(function(){
 			    	format: "json"
 			  	})
 			    .done(function( data ) {
-			    	if(data.length > 0){
+			    	if(data.records.length > 0){
 			    		showSavedVines(data);
 			    	}
 			    })

@@ -42,6 +42,7 @@ $(function(){
 			});
 	}		    	
 	$('.background').click(function(){
+		window.location.hash = '';
 		$('.modal').hide(250);
 		$('body').css('overflow', 'visible');
 	});
@@ -60,7 +61,7 @@ $(function(){
 		    	format: "json"
 		  	})
 		    .done(function( data ) {
-		    	if(data.length > 0){
+		    	if(data.records.length > 0){
 			    	showVines(data, false);
 			    }
 		    })
