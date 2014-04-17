@@ -92,8 +92,13 @@ $(function(){
 			$('.modal > .content > .next').show(0);
 		}
 		window.location.hash = '#!/' + vine._id;
-		//$('.twitter').html('https://twitter.com/share?url=' + window.location);
-		//$.getScript("http://platform.twitter.com/widgets.js"); 
+		$('meta[name=og\\:url]').attr('content', window.location);
+		$('meta[name=og\\:title]').attr('content', vine.username);
+		$('meta[name=og\\:description]').attr('content', vine.description);
+		$('meta[name=og\\:image]').attr('content', vine.thumbnailUrl);
+		$('#fblike').attr('href', window.location);
+		$('.twitter > iframe').attr('src', 'http://platform.twitter.com/widgets/tweet_button.html?url=' + window.location + '&amp;title=paign&amp;text=' + vine.description + '&amp;count=horizontal');
+		$.getScript("http://platform.twitter.com/widgets.js"); 
 	}
 	function updateTwitterValues(share_url, title) {
 		// clear out the <a> tag that's currently there...probably don't really need this since you're replacing whatever is in there already.
