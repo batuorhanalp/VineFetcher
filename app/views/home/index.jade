@@ -1,10 +1,37 @@
-extends ../layouts/default
-
-block main
-  h2= title
-
-block content
-  ol
-    li Awesome! Now add some routes, models, views and controllers.
-    li Change the content of
-      code app/views/home/index.jade
+doctype html(xmlns:fb='http://ogp.me/ns/fb#')
+head
+  title Vine Fetcher
+  meta(charset='UTF-8')
+  meta(property='og:image', content='http://davidwalsh.name/wp-content/themes/klass/img/facebooklogo.png')
+  meta(property='og:title', content='Dominos')
+  meta(property='og:description', content='Dominos #BolMalzemos')
+  meta(property='og:url', content='9numara.com')
+  meta(property='og:site_name', content='Vine Fetcher')
+  meta(property='og:type', content='page')
+  link(rel='stylesheet', type='text/css', href='css/style.css')
+  link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', rel='stylesheet', type='text/css')
+  script(src='js/jquery.min.js', type='text/javascript', charset='utf-8')
+  script(src='js/moment.min.js', type='text/javascript', charset='utf-8')
+  script(src='js/scripts.js', type='text/javascript', charset='utf-8')
+body
+	include ../includes/fb
+  a.logo(href='http://www.karbonat.com', title='Karbonat', target='_blank')
+  .modal
+    .content
+      a.previous(title='Previous Vine')
+      .video
+      .info
+        span.title
+        span.time
+        span.description
+        .share
+          a.permalink(href='#', target='_blank', title='') Sayfasına git
+          span.facebook
+            fb:like#fblike(href='https://developers.facebook.com/docs/plugins/', layout='button_count', action='like', show_faces='false', share='true')
+          span.twitter
+            iframe(allowtransparency='true', frameborder='0', scrolling='no', src='http://platform.twitter.com/widgets/tweet_button.html?url=http://www.lasgrwc2.org/thewatershed/eventdetails.aspx%3Fid%3D610&title=paign&text=ttest123&count=horizontal', style='height: 50px;')
+      a.next(title='Next Vine')
+    .background
+  .wrapper
+    .header
+  .footer

@@ -96,14 +96,14 @@ $(function(){
 		$('meta[name=og\\:title]').attr('content', vine.username);
 		$('meta[name=og\\:description]').attr('content', vine.description);
 		$('meta[name=og\\:image]').attr('content', vine.thumbnailUrl);
-		$('#fblike').attr('href', window.location);
-		$('.twitter > iframe').attr('src', 'http://platform.twitter.com/widgets/tweet_button.html?url=' + window.location + '&amp;title=paign&amp;text=' + vine.description + '&amp;count=horizontal');
-		$.getScript("http://platform.twitter.com/widgets.js"); 
+		//$('#fblike').attr('href', window.location);
+		//$('.twitter > iframe').attr('src', 'http://platform.twitter.com/widgets/tweet_button.html?url=' + window.location + '&amp;title=paign&amp;text=' + vine.description + '&amp;count=horizontal');
+		//$.getScript("http://platform.twitter.com/widgets.js"); 
 	}
 	function updateTwitterValues(share_url, title) {
 		// clear out the <a> tag that's currently there...probably don't really need this since you're replacing whatever is in there already.
 		  $('#twitter-share-section').html('&nbsp;'); 
-		  $('#twitter-share-section').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + share_url +'" data-size="large" data-text="' + title + '" data-count="none">Tweet</a>');
+		  $('#twitter-share-section').html('<a href="https://twitter.com/share?url=http://report.karbonat.com/bolmalzemos" class="twitter-share-button" data-url="' + share_url +'" data-size="large" data-text="' + title + '" data-count="none">Tweet</a>');
 		twttr.widgets.load();
 	}
 	$.getJSON( "/videos").done(function( data ) {
