@@ -32,6 +32,7 @@ body { background: url(../images/BG_Pattern.png); font-family: 'Source Sans Pro'
 .search {position: fixed;padding-left: 40px;padding-top: 15px;background: url(../images/modal_bg.png);width: 100%;padding-bottom: 10px;}
 .search input[type=text]{border: 1px solid;outline: none;padding: 5px;color: #fefefe;font-weight: bold;font-size: 14px;background: url(../images/modal_bg.png);}
 .search input[type=button]{padding: 6px;border: none;color: #004b39;background-color: #efefef;font-weight: bold;width: 100px;}
+.footer {display:block;clear:both; width:100%; height:20px;}
 .admin-links { 
   position: absolute;
   top: 24px;
