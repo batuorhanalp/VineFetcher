@@ -112,7 +112,7 @@ $(function(){
 			$('.modal > .content > .info > .share').html('<input type="button" class="approve" value="Approve"/>');
 			$('.modal > .content > .info > .share > input[type=button]').click(function(){ approveVineModal(vine.videoId); });	
 		}
-   		$('.modal > .content > .video').html('<iframe class="vine-embed" src="' + vine.permalink + '/embed/simple?audio=1" width="550" height="550" frameborder="0"></iframe><script async src="https://platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>');
+   		$('.modal > .content > .video').html('<iframe class="vine-embed" src="' + vine.permalink + '/embed/simple?audio=0" width="550" height="550" frameborder="0"></iframe><script async src="https://platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>');
 		$('.modal > .content > .info > .title').html(vine.username);
 		$('.modal > .content > .info > .description').html(vine.description);
 		$('.modal > .content > .info > .time').html(timeShortener(vine.created));
@@ -149,7 +149,10 @@ $(function(){
 	}
 	function approveVineModal(vineVideo){
 		var selectedVine = getObjects(vines, 'videoId', vineVideo);
-		var vineData = JSON.stringify(selectedVine);
+		var vineData = JSON.stringify(selectedVine[0]);
+		if(selectedVine[0]._id != undefined){
+			vineData = JSON.stringify({ videoId:selectedVine.videoId, thumbnailUrl: selectedVine.thumbnailUrl, permalink: selectedVine.shareUrl, username: selectedVine.username, description: selectedVine.description, created: selectedVine.created, tag:selectedVine.searchedTag });
+		}
 		$.ajax({
 			url:'/admin/video/approve',
 			type: 'POST',
@@ -159,7 +162,8 @@ $(function(){
 				$('.modal > .content > .info > .share').html('<input type="button" class="approve delete" value="Delete"/>');
 				$('.modal > .content > .info > .share > input[type=button]').click(function(){ deleteVineModal(vineVideo); });
 				$('#' + vineVideo + ' > input[type=button]').remove();
-				$('#' + vineVideo).append('<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + vines.indexOf(selectedVine) + ', this)"/>');
+				$('#' + vineVideo).append('<input type="button" class="approve delete" value="Delete"/>');
+				setAdminEvents();
 			}
 		});
 	}
@@ -173,7 +177,8 @@ $(function(){
 				$('.modal > .content > .info > .share').html('<input type="button" class="approve" value="Approve"/>');
 				$('.modal > .content > .info > .share > input[type=button]').click(function(){ approveVineModal(videoId); });
 				$('#' + videoId + ' > input[type=button]').remove();
-				$('#' + videoId).append('<input type="button" class="approve" value="Approve" onclick="approveVine(' + vines.indexOf(selectedVine) + ', this)"/>');
+				$('#' + videoId).append('<input type="button" id="' + vines.indexOf(selectedVine) + '" class="approve" value="Approve"/>');
+				setAdminEvents();
 			}
 		});
 	}
@@ -227,17 +232,19 @@ $(function(){
 		});
 	}
 	function setAdminEvents(){
-		$('.approve').unbind('click');
-		$('.approve.delete').unbind('click');
-		
-		$('.approve.delete').click(function(){
-			deleteVine(this);
-		});
-
-		$('.approve').click(function(){
-		    var videoIndex = $(this).attr('id');
-			approveVine(videoIndex, this);
+		$('.item > input[type=button]').each(function( index ) {
+			if($(this).hasClass('delete')){
+				$(this).click(function(){
+					deleteVine(this);
+				});
+			}else{
+				$(this).click(function(){
+			    	var videoIndex = $(this).attr('id');
+					approveVine(videoIndex, this);
+				});
+			}
 		});
 	}
 });
+
 	
