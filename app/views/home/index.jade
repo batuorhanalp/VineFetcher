@@ -14,7 +14,17 @@ head
   script(src='js/moment.min.js', type='text/javascript', charset='utf-8')
   script(src='js/scripts.js', type='text/javascript', charset='utf-8')
 body
-	include ../includes/fb
+	div#fb-root
+	script#facebook-jssdk(src='//connect.facebook.net/en_US/all.js#xfbml=1&appId=1415472585380601')
+	script
+	  (function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1415472585380601";
+	  fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+
   a.logo(href='http://www.karbonat.com', title='Karbonat', target='_blank')
   .modal
     .content
