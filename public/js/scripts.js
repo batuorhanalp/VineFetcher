@@ -28,7 +28,7 @@ $(function(){
 			$('body').css('overflow', 'visible');
 			$('.modal > .content > .video').html('');
 		});
-		if(onload){
+		if(window.location.hash && onload){
 			showModal(videoToShowOnStart);
 		}
 	}
@@ -60,7 +60,9 @@ $(function(){
 		    	format: "json"
 		  	})
 		    .done(function( data ) {
-		    	showVines(data, false);
+		    	if(data.length > 0){
+			    	showVines(data, false);
+			    }
 		    })
 		    .fail(function(){
 		    	page--;
@@ -91,8 +93,13 @@ $(function(){
 		}
 		window.location.hash = '#!/' + vine._id;
 		//$('.twitter').html('https://twitter.com/share?url=' + window.location);
-		$.getScript("http://platform.twitter.com/widgets.js"); 
-		//$('#fbShare').attr('data-href', url);
+		//$.getScript("http://platform.twitter.com/widgets.js"); 
+	}
+	function updateTwitterValues(share_url, title) {
+		// clear out the <a> tag that's currently there...probably don't really need this since you're replacing whatever is in there already.
+		  $('#twitter-share-section').html('&nbsp;'); 
+		  $('#twitter-share-section').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + share_url +'" data-size="large" data-text="' + title + '" data-count="none">Tweet</a>');
+		twttr.widgets.load();
 	}
 	$.getJSON( "/videos").done(function( data ) {
     	showVines(data, true);

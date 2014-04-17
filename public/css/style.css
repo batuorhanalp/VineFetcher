@@ -23,7 +23,7 @@ body { background: url(../images/BG_Pattern.png); font-family: 'Source Sans Pro'
 .modal .content .time { color: #cfcfcf;float: left; text-align: right; width: 40px;font-size: 14px; }
 .modal .content .description { color: #464646;width: 100%; font-size: 16px; font-weight: normal; margin-top: 14px; display: block;margin-top: 25px; height: 53px;line-height: 22px;}
 .modal .content .share { width: 100%; display: block;}
-.modal .content .share a { background: url(../images/link.png) no-repeat; width: 100px; height: 26px; display: block;float: left; color: #64b189; text-decoration: none;padding-left: 23px; line-height: 23px;}
+.modal .content .share .permalink { background: url(../images/link.png) no-repeat; width: 100px; height: 26px; display: block;float: left; color: #64b189; text-decoration: none;padding-left: 23px; line-height: 23px;}
 .modal .content .previous { position: absolute; background: url(../images/arrows.png) 0 0; width: 48px;height: 83px; z-index: 100000; margin-left: -62px;top: 295px;}
 .modal .content .next { position: absolute; background: url(../images/arrows.png) -48px 0; width: 48px;height: 83px; z-index: 100000; margin-left: 431px;top: 295px;}
 .modal .content .next.wide {margin-left: 564px}

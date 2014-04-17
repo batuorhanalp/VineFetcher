@@ -10,7 +10,7 @@ $(function(){
 	function showSavedVines(vinesData){
 		$(vinesData.records).each(function(){
 			if(this.videoId !== undefined){
-				var lowButton = '<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + this.videoId + ', this)"/>';
+				var lowButton = '<input type="button" class="approve delete" value="Delete"/>';
 				$('.wrapper').append('<div class="item long" id="' + this.videoId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description long">' + this.description + '</div>' + lowButton + '</div>');
 		    	vines.push(this);
 		    }
@@ -30,6 +30,7 @@ $(function(){
 			$('body').css('overflow', 'visible');
 			$('.modal > .content > .video').html('');
 		});
+		setAdminEvents();
 	}	
 	function showVines(vinesData){
 		$.getJSON( "/admin/video/ids").done(function(data) {
@@ -38,10 +39,10 @@ $(function(){
 			$(vinesData).each(function(){
 				var postId = this.postId;
 		    	var newVine = {videoId:postId, thumbnailUrl: this.thumbnailUrl, permalink: this.shareUrl, username: this.username, description: this.description, created: this.created, tag:searchedTag };
-				var lowButton = '<input type="button" class="approve" value="Approve" onclick="approveVine(' + vines.length + ', this)"/>';
+				var lowButton = '<input type="button" id="' + vines.length + '" class="approve" value="Approve"/>';
 				$.grep(savedPostIds, function (item) {
    					if(item == postId){
-						lowButton = '<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + postId + ', this)"/>';
+						lowButton = '<input type="button" class="approve delete" value="Delete"/>';
    					}
 				});
 				$('.wrapper').append('<div class="item long" id="' + postId + '"><div class="thumbnail" style="background: url('+ this.thumbnailUrl +')"><a href="#"></a></div><div class="title">' + this.username + '</div><div class="time">' + timeShortener(this.created) + '</div><div class="description long">' + this.description + '</div>' + lowButton + '</div>');
@@ -63,6 +64,7 @@ $(function(){
 				$('body').css('overflow', 'visible');
 				$('.modal > .content > .video').html('');
 			});
+			setAdminEvents();
 		});
 	}		    	
 	$('.background').click(function(){
@@ -80,7 +82,21 @@ $(function(){
 	$(window).scroll(function() {
 	    if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
 	    	page++;
-	    	getVinesFromApp();
+	    	if($('.search > input[type=text]').val() == ""){
+	    			$.getJSON( "/videos?page=" + page, {
+			    	format: "json"
+			  	})
+			    .done(function( data ) {
+			    	if(data.length > 0){
+			    		showSavedVines(data);
+			    	}
+			    })
+			    .fail(function(){
+			    	page--;
+			    });
+	    	}else {
+	    		getVinesFromApp();
+	    	}
 	    }
 	});
 	function timeShortener(time){
@@ -117,6 +133,7 @@ $(function(){
 	
 	$('.search > input[type=button]').click(function(){
 		$('.wrapper').html('<div class="header"></div>');
+		vines = new Array();
 		page = 1;
 		getVinesFromApp();
 	});
@@ -175,8 +192,7 @@ $(function(){
 	$.getJSON( "/videos").done(function(data) {
     	showSavedVines(data);
     });
-});
-	function approveVine(vineVideo, button){
+    function approveVine(vineVideo, button){
 		var vineData = JSON.stringify(vines[vineVideo]);
 		$.ajax({
 			url:'/admin/video/approve',
@@ -186,19 +202,42 @@ $(function(){
 			success: function(){
 				var parentDiv = $(button).parent();
 				$(button).remove();
-				$(parentDiv).append('<input type="button" class="approve delete" value="Delete" onclick="deleteVine(' + vineVideo + ', this)"/>');
+				$(parentDiv).append('<input type="button" class="approve delete" value="Delete"/>');
+				setAdminEvents();
 			}
 		});
 	}
-	function deleteVine(videoId, button){
+	function deleteVine(button){
+		var videoId = $(button).parent().attr('id');
 		$.ajax({
 			url:'/admin/video/delete',
 			type: 'POST',
 			data: 'videoId=' + videoId,
 			success: function(){
-				var parentDiv = $(button).parent();
-				$(button).remove();
-				$(parentDiv).append('<input type="button" class="approve" value="Approve" onclick="approveVine(' + videoId + ', this)"/>');
+				$.grep(vines, function (item) {
+   					if(item.videoId == videoId){
+						var videoIndex = $.inArray(item, vines);
+						var parentDiv = $(button).parent();
+						$(button).remove();
+						$(parentDiv).append('<input type="button" id="' + videoIndex + '" class="approve" value="Approve" />');
+						setAdminEvents();
+   					}
+				});
 			}
 		});
 	}
+	function setAdminEvents(){
+		$('.approve').unbind('click');
+		$('.approve.delete').unbind('click');
+		
+		$('.approve.delete').click(function(){
+			deleteVine(this);
+		});
+
+		$('.approve').click(function(){
+		    var videoIndex = $(this).attr('id');
+			approveVine(videoIndex, this);
+		});
+	}
+});
+	
