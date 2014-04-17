@@ -233,6 +233,7 @@ $(function(){
 	}
 	function setAdminEvents(){
 		$('.item > input[type=button]').each(function( index ) {
+			$(this).unbind('click');
 			if($(this).hasClass('delete')){
 				$(this).click(function(){
 					deleteVine(this);
