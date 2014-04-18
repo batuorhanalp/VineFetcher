@@ -3,10 +3,10 @@ html
   head
     title Vine Fetcher
     meta(charset='UTF-8')
-    meta(property='og:image', content='http://9numara.com:3000/images/karbonat-report.jpg')
+    meta(property='og:image', content='http://#{ req.headers.host }/images/karbonat-report.jpg')
     meta(property='og:title', content='Bol Malzemos | Karbonat')
     meta(property='og:description', content='Karbonat&#39;tan Domino&#39;s&#39;a özel yarışma: #BolMalzemos&#39;un tüm malzemelerini say, Vine&#39;a yükle, Bol Malzemos kazan!')
-    meta(property='og:url', content='9numara.com')
+    meta(property='og:url', content='#{ req.headers.host }')
     meta(property='og:site_name', content='Vine Fetcher')
     meta(property='og:type', content='page')
     link(rel='stylesheet', type='text/css', href='css/style.css')
