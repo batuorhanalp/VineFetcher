@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block content
-  form(action="/admin/login", method="post")
+  form(action="/bolmalzemos/admin/login", method="post")
     input(type='hidden', name='_csrf', value="#{csrf_token}")
     input#email(type="email", placeholder="Email", name="email")
     input#password(type="password", placeholder="Password", name="password")

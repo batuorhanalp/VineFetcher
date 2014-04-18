@@ -9,13 +9,13 @@ block content
 		.admin-links
 			if req.isAuthenticated()
 				div Merhaba #{ req.user.name } 
-				a(href="/admin/logout") cikis yap
+				a(href="/bolmalzemos/admin/logout") cikis yap
 				span &nbsp; &nbsp; | &nbsp; &nbsp;
-				a(href="/users") Admin listesi
+				a(href="/bolmalzemos/users") Admin listesi
 				span &nbsp; &nbsp; | &nbsp; &nbsp;
-				a(href="/admin/create") Yeni Admin Ekle
+				a(href="/bolmalzemos/admin/create") Yeni Admin Ekle
 			else
-				a(href="/admin/login") giris yap
+				a(href="/bolmalzemos/admin/login") giris yap
 
 	.modal
 		.content

@@ -7,6 +7,7 @@ $(function(){
 	var vineCounter = 0;
 	var page = 1;
 	var savedPostIds;
+  var basePath = '/bolmalzemos';
 	function showSavedVines(vinesData){
 		$(vinesData.records).each(function(){
 			if(this.videoId !== undefined){
@@ -33,7 +34,7 @@ $(function(){
 		setAdminEvents();
 	}	
 	function showVines(vinesData){
-		$.getJSON( "/admin/video/ids").done(function(data) {
+		$.getJSON(basePath + "/admin/video/ids").done(function(data) {
     		savedPostIds = data;
 			var searchedTag = $('.search > input[type=text]').val();
 			$(vinesData).each(function(){
@@ -83,7 +84,7 @@ $(function(){
 	    if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
 	    	page++;
 	    	if($('.search > input[type=text]').val() == ""){
-	    			$.getJSON( "/videos?page=" + page, {
+	    			$.getJSON(basePath + "/videos?page=" + page, {
 			    	format: "json"
 			  	})
 			    .done(function( data ) {
@@ -154,7 +155,7 @@ $(function(){
 			vineData = JSON.stringify({ videoId:selectedVine.videoId, thumbnailUrl: selectedVine.thumbnailUrl, permalink: selectedVine.shareUrl, username: selectedVine.username, description: selectedVine.description, created: selectedVine.created, tag:selectedVine.searchedTag });
 		}
 		$.ajax({
-			url:'/admin/video/approve',
+			url:basePath + '/admin/video/approve',
 			type: 'POST',
 			contentType: 'application/json',
 			data: vineData,
@@ -170,7 +171,7 @@ $(function(){
 	function deleteVineModal(videoId){
 		var selectedVine = getObjects(vines, 'videoId', videoId);
 		$.ajax({
-			url:'/admin/video/delete',
+			url: basePath + '/admin/video/delete',
 			type: 'POST',
 			data: 'videoId=' + videoId,
 			success: function(){
@@ -194,7 +195,7 @@ $(function(){
 	    }
 	    return objects;
 	}
-	$.getJSON( "/videos").done(function(data) {
+	$.getJSON(basePath + "/videos").done(function(data) {
     	showSavedVines(data);
     });
     function approveVine(vineVideo, button){
@@ -203,7 +204,7 @@ $(function(){
 			vineData = JSON.stringify({ videoId:vines[vineVideo].videoId, thumbnailUrl: vines[vineVideo].thumbnailUrl, permalink: vines[vineVideo].shareUrl, username: vines[vineVideo].username, description: vines[vineVideo].description, created: vines[vineVideo].created, tag:vines[vineVideo].searchedTag });
 		}
 		$.ajax({
-			url:'/admin/video/approve',
+			url: basePath + '/admin/video/approve',
 			type: 'POST',
 			contentType: 'application/json',
 			data: vineData,
@@ -218,7 +219,7 @@ $(function(){
 	function deleteVine(button){
 		var videoId = $(button).parent().attr('id');
 		$.ajax({
-			url:'/admin/video/delete',
+			url: basePath + '/admin/video/delete',
 			type: 'POST',
 			data: 'videoId=' + videoId,
 			success: function(){

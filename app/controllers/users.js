@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
 
+var basePath = '/bolmalzemos';
+
 exports.index = function (req, res) {
   User.find(function(err, users) {
     if (err) throw err;
@@ -23,6 +25,6 @@ exports.deleteUser = function (req, res) {
 
   User.findByIdAndRemove(userId, function(err) {
     if (err) throw err;
-    return res.redirect('/users');
+    return res.redirect(basePath + '/users');
   });
 };

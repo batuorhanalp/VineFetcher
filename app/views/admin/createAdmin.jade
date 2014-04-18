@@ -4,7 +4,7 @@ block main
   h1 Register a new admin
 
 block content
-  form(action='/admin/create', method='post')
+  form(action='/bolmalzemos/admin/create', method='post')
     input(type='hidden', name='_csrf', value="#{csrf_token}")
     input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
     input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)

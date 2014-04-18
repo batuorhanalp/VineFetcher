@@ -10,7 +10,7 @@ block content
       li 
         span Name: #{ user.name }
         span Email: #{ user.email }
-        form(action="/users/delete", method="post")
+        form(action="/bolmalzemos/users/delete", method="post")
           input(type='hidden', name='_csrf', value="#{csrf_token}")
           input(type='hidden', name='userId', value="#{user.id}")
           button(type='submit') delete
@@ -18,7 +18,7 @@ block content
       li no user
 
   h2 Create new admin
-    form(action='/admin/create', method='post')
+    form(action='/bolmalzemos/admin/create', method='post')
       input(type='hidden', name='_csrf', value="#{csrf_token}")
       input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
       input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)
