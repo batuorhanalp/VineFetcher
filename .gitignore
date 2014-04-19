@@ -26,3 +26,6 @@ node_modules
 
 # mac's bullshit files
 .DS_Store
+
+# windows' bullshit files
+Thumbs.db
