@@ -31,30 +31,30 @@ module.exports = function (app, passport) {
 
   app.namespace(basePath, function() {
     // public pages
-    app.get('/', home.index);
-    app.get('/videos', home.videos);
+    app.get(basePath, home.index);
+    app.get(basePath + '/videos', home.videos);
 
     // auth pages
-    app.get('/admin/login', admin.login);
-    app.post('/admin/login', passport.authenticate(
+    app.get(basePath + '/admin/login', admin.login);
+    app.post(basePath + '/admin/login', passport.authenticate(
           'local', 
           { 
             successRedirect: basePath + '/admin', 
             failureRedired: basePath + '/admin/login' 
           }));
-    app.get('/admin/logout', requiresLogin, admin.logout);
-    app.get('/admin/create', requiresLogin, admin.createAdmin);
-    app.post('/admin/create', requiresLogin, admin.createAdminPost);
+    app.get(basePath + '/admin/logout', requiresLogin, admin.logout);
+    app.get(basePath + '/admin/create', requiresLogin, admin.createAdmin);
+    app.post(basePath + '/admin/create', requiresLogin, admin.createAdminPost);
 
     // admin pages
-    app.get('/admin', requiresLogin, admin.index);
-    app.post('/admin/video/approve', requiresLogin, admin.approve);
-    app.post('/admin/video/delete', requiresLogin, admin.disapprove);
-    app.get('/admin/video/ids', requiresLogin, admin.approved);
+    app.get(basePath + '/admin', requiresLogin, admin.index);
+    app.post(basePath + '/admin/video/approve', requiresLogin, admin.approve);
+    app.post(basePath + '/admin/video/delete', requiresLogin, admin.disapprove);
+    app.get(basePath + '/admin/video/ids', requiresLogin, admin.approved);
 
     // user pages
-    app.get('/users', requiresLogin, users.index);
-    app.post('/users/delete', requiresLogin, users.deleteUser);
+    app.get(basePath + '/users', requiresLogin, users.index);
+    app.post(basePath + '/users/delete', requiresLogin, users.deleteUser);
   });
 
 };
