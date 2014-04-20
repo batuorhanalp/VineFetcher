@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+var basePath = 'http://report.karbonat.com/bolmalzemos';
 
 var mongoose = require('mongoose');
 var passportOptions = {
@@ -14,7 +15,6 @@ var home = require('home'),
     admin = require('admin'),
     users = require('users');
 
-var basePath = '/bolmalzemos';
 
 // middlewares
 var requiresLogin = function(req, res, next) {

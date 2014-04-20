@@ -5,7 +5,7 @@ $(function(){
 	var vineCounter = 0;
 	var page = 1;
 	var videoToShowOnStart = 0;
-  var basePath = "/bolmalzemos";
+	var baseUrl = 'http://report.karbonat.com/bolmalzemos';
 	function showVines(vinesData, onload){
 		$(vinesData.records).each(function(){
 			if(this.videoId !== undefined){
@@ -58,7 +58,7 @@ $(function(){
 	$(window).scroll(function() {
 	    if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
 	    	page++;
-	    	$.getJSON(basePath + "/videos?page=" + page, {
+	    	$.getJSON(baseUrl + "/videos?page=" + page, {
 		    	format: "json"
 		  	})
 		    .done(function( data ) {
@@ -108,7 +108,7 @@ $(function(){
 		  $('#twitter-share-section').html('<a href="https://twitter.com/share?url=http://report.karbonat.com/bolmalzemos" class="twitter-share-button" data-url="' + share_url +'" data-size="large" data-text="' + title + '" data-count="none">Tweet</a>');
 		twttr.widgets.load();
 	}
-	$.getJSON(basePath + "/videos").done(function( data ) {
+	$.getJSON(baseUrl + "videos").done(function( data ) {
     	showVines(data, true);
     });
 });
