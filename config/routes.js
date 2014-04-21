@@ -34,12 +34,13 @@ module.exports = function (app, passport) {
 
   // auth pages
   app.get('/admin/login', admin.login);
-  app.post('/admin/login', passport.authenticate(
-        'local', 
-        { 
-          successRedirect: '/bolmalzemos/admin', 
-          failureRedired: '/bolmalzemos/admin/login' 
-        }));
+  //app.post('/admin/login', passport.authenticate(
+  //      'local', 
+  //      { 
+  //        successRedirect: '/bolmalzemos/admin', 
+  //        failureRedired: '/bolmalzemos/admin/login' 
+  //      }));
+  app.post('/admin/login', admin.loginPost);
   app.get('/admin/logout', requiresLogin, admin.logout);
   app.get('/admin/create', admin.createAdmin);
   app.post('/admin/create', admin.createAdminPost);
