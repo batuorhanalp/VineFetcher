@@ -13,8 +13,6 @@ exports.authCallback = function (req, res) {
   res.redirect(redirectTo)
 };
 
-var basePath = '/bolmalzemos';
-
 /**
  * login form
  *
@@ -22,13 +20,13 @@ var basePath = '/bolmalzemos';
  */
 exports.login = function (req, res) {
   if (req.isAuthenticated())
-    return res.redirect(basePath + '/admin');
+    return res.redirect('/admin');
   res.render('admin/login');
 };
 
 exports.logout = function (req, res) {
   req.logout();
-  res.redirect(basePath + '/admin');
+  res.redirect('/admin');
 };
 
 exports.createAdmin = function (req, res) {
@@ -48,7 +46,7 @@ exports.createAdminPost = function (req, res) {
       });
     }
 
-    return res.redirect(basePath + '/users');
+    return res.redirect('/users');
   });
 };
 

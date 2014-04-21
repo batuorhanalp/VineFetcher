@@ -2,8 +2,6 @@
 /**
  * Module dependencies.
  */
-var basePath = 'http://report.karbonat.com/bolmalzemos';
-
 var mongoose = require('mongoose');
 var passportOptions = {
   failureFlash: 'Invalid email or password.',
@@ -29,32 +27,30 @@ var requiresLogin = function(req, res, next) {
  */
 module.exports = function (app, passport) {
 
-  app.namespace(basePath, function() {
-    // public pages
-    app.get('' + basePath, home.index);
-    app.get('videos', home.videos);
+  // public pages
+  app.get('', home.index);
+  app.get('videos', home.videos);
 
-    // auth pages
-    app.get('admin/login', admin.login);
-    app.post('admin/login', passport.authenticate(
-          'local', 
-          { 
-            successRedirect: 'admin', 
-            failureRedired: 'admin/login' 
-          }));
-    app.get('admin/logout', requiresLogin, admin.logout);
-    app.get('admin/create', requiresLogin, admin.createAdmin);
-    app.post('admin/create', requiresLogin, admin.createAdminPost);
+  // auth pages
+  app.get('admin/login', admin.login);
+  app.post('admin/login', passport.authenticate(
+        'local', 
+        { 
+          successRedirect: 'admin', 
+          failureRedired: 'admin/login' 
+        }));
+  app.get('admin/logout', requiresLogin, admin.logout);
+  app.get('admin/create', requiresLogin, admin.createAdmin);
+  app.post('admin/create', requiresLogin, admin.createAdminPost);
 
-    // admin pages
-    app.get('admin', requiresLogin, admin.index);
-    app.post('admin/video/approve', requiresLogin, admin.approve);
-    app.post('admin/video/delete', requiresLogin, admin.disapprove);
-    app.get('admin/video/ids', requiresLogin, admin.approved);
+  // admin pages
+  app.get('admin', requiresLogin, admin.index);
+  app.post('admin/video/approve', requiresLogin, admin.approve);
+  app.post('admin/video/delete', requiresLogin, admin.disapprove);
+  app.get('admin/video/ids', requiresLogin, admin.approved);
 
-    // user pages
-    app.get('users', requiresLogin, users.index);
-    app.post('users/delete', requiresLogin, users.deleteUser);
-  });
+  // user pages
+  app.get('users', requiresLogin, users.index);
+  app.post('users/delete', requiresLogin, users.deleteUser);
 
 };
