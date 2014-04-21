@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+    passport = require('passport'),
     Video = mongoose.model('Video'),
     User = mongoose.model('User')
     ;
@@ -21,13 +22,57 @@ exports.authCallback = function (req, res) {
  * @url: /admin/login
  */
 exports.login = function (req, res) {
-  // check how many admins are registered
-  // if no admin is there, create this one as default admin
-  //User.find(
-
   if (req.isAuthenticated())
     return res.redirect(basePath + 'admin');
   res.render('admin/login');
+};
+
+
+exports.loginPost = function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { 
+      console.log('err: ' + err);
+      return next(err); 
+    }
+
+    if (!user) { 
+      // check how many admins are registered
+      // if no admin is there, create this one as default admin
+      console.log('create user');
+      User.find(function(err, users) {
+        console.log('params: ' + req.param('email') + ' '+ req.param('password'));
+        if (users.length == 0) {
+          var u = new User({
+            name: 'Admin',
+            email: req.param('email'),
+            username: 'admin',
+            password: req.param('password')
+          });
+          u.provider = 'local';
+          u.save(function(e, us) {
+            if (e) throw e;
+
+                return res.redirect('/')
+            // manually login
+            //req.logIn(us, function(err) {
+            //  console.log('logging in');
+            //  if (err) return next(err)
+            //  return res.redirect('/bolmalzemos/admin/')
+            //})
+          });
+        } else {
+          if (req.isAuthenticated())
+            return res.redirect(basePath + 'admin');
+          res.render('admin/login');
+        }
+      });
+    }
+
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/bolmalzemos/admin');
+    });
+  })(req, res, next);
 };
 
 exports.logout = function (req, res) {
