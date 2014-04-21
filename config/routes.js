@@ -41,8 +41,8 @@ module.exports = function (app, passport) {
           failureRedired: '/bolmalzemos/admin/login' 
         }));
   app.get('/admin/logout', requiresLogin, admin.logout);
-  app.get('/admin/create', requiresLogin, admin.createAdmin);
-  app.post('/admin/create', requiresLogin, admin.createAdminPost);
+  app.get('/admin/create', admin.createAdmin);
+  app.post('/admin/create', admin.createAdminPost);
 
   // admin pages
   app.get('/admin', requiresLogin, admin.index);

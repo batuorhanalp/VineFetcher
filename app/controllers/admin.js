@@ -21,6 +21,10 @@ exports.authCallback = function (req, res) {
  * @url: /admin/login
  */
 exports.login = function (req, res) {
+  // check how many admins are registered
+  // if no admin is there, create this one as default admin
+  //User.find(
+
   if (req.isAuthenticated())
     return res.redirect(basePath + 'admin');
   res.render('admin/login');
