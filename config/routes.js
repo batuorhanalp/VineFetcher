@@ -18,7 +18,7 @@ var home = require('home'),
 var requiresLogin = function(req, res, next) {
   if (req.isAuthenticated()) return next();
   if (req.method == "GET") req.session.returnTo = req.originalUrl;
-  res.redirect('admin/login');
+  res.redirect('bolmalzemos/admin/login');
 };
 
 
@@ -29,28 +29,29 @@ module.exports = function (app, passport) {
 
   // public pages
   app.get('', home.index);
-  app.get('videos', home.videos);
+  app.get('/', home.index);
+  app.get('/videos', home.videos);
 
   // auth pages
-  app.get('admin/login', admin.login);
-  app.post('admin/login', passport.authenticate(
+  app.get('/admin/login', admin.login);
+  app.post('/admin/login', passport.authenticate(
         'local', 
         { 
-          successRedirect: 'admin', 
-          failureRedired: 'admin/login' 
+          successRedirect: '/bolmalzemos/admin', 
+          failureRedired: '/bolmalzemos/admin/login' 
         }));
-  app.get('admin/logout', requiresLogin, admin.logout);
-  app.get('admin/create', requiresLogin, admin.createAdmin);
-  app.post('admin/create', requiresLogin, admin.createAdminPost);
+  app.get('/admin/logout', requiresLogin, admin.logout);
+  app.get('/admin/create', requiresLogin, admin.createAdmin);
+  app.post('/admin/create', requiresLogin, admin.createAdminPost);
 
   // admin pages
-  app.get('admin', requiresLogin, admin.index);
-  app.post('admin/video/approve', requiresLogin, admin.approve);
-  app.post('admin/video/delete', requiresLogin, admin.disapprove);
-  app.get('admin/video/ids', requiresLogin, admin.approved);
+  app.get('/admin', requiresLogin, admin.index);
+  app.post('/admin/video/approve', requiresLogin, admin.approve);
+  app.post('/admin/video/delete', requiresLogin, admin.disapprove);
+  app.get('/admin/video/ids', requiresLogin, admin.approved);
 
   // user pages
-  app.get('users', requiresLogin, users.index);
-  app.post('users/delete', requiresLogin, users.deleteUser);
+  app.get('/users', requiresLogin, users.index);
+  app.post('/users/delete', requiresLogin, users.deleteUser);
 
 };

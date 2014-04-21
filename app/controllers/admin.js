@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User')
     ;
 
+var basePath = '/bolmalzemos/';
+
 exports.authCallback = function (req, res) {
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/'
   delete req.session.returnTo
@@ -20,17 +22,17 @@ exports.authCallback = function (req, res) {
  */
 exports.login = function (req, res) {
   if (req.isAuthenticated())
-    return res.redirect('/admin');
+    return res.redirect(basePath + 'admin');
   res.render('admin/login');
 };
 
 exports.logout = function (req, res) {
   req.logout();
-  res.redirect('/admin');
+  res.redirect(basePath + 'admin');
 };
 
 exports.createAdmin = function (req, res) {
-  res.render('admin/createAdmin', {
+  res.render('/admin/createAdmin', {
     user: new User()  
   });
 }
@@ -46,7 +48,7 @@ exports.createAdminPost = function (req, res) {
       });
     }
 
-    return res.redirect('/users');
+    return res.redirect(basePath + 'users');
   });
 };
 

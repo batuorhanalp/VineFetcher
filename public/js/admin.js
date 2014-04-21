@@ -7,7 +7,7 @@ $(function(){
 	var vineCounter = 0;
 	var page = 1;
 	var savedPostIds;
-	var baseUrl = 'http://report.karbonat.com/bolmalzemos';
+	var baseUrl = '/bolmalzemos';
 	function showSavedVines(vinesData){
 		$(vinesData.records).each(function(){
 			if(this.videoId !== undefined){
