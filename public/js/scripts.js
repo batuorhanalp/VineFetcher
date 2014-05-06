@@ -58,7 +58,7 @@ $(function(){
 	$(window).scroll(function() {
 	    if($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
 	    	page++;
-	    	$.getJSON(baseUrl + "/videos?page=" + page, {
+	    	$.getJSON(baseUrl + "videos?page=" + page, {
 		    	format: "json"
 		  	})
 		    .done(function( data ) {
