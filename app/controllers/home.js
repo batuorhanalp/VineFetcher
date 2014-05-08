@@ -21,7 +21,7 @@ exports.videos = function (req, res) {
   // get all videos
   Video
     .find()
-    .sort("-order")
+    .sort("order")
     .limit(itemPerPage)
     .skip(startFrom)
     .exec(function(error, videos) {
