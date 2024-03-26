@@ -20,7 +20,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.19.2",
     "express-namespace": "*",
     "mongoose": "*",
     "mongoose-user": "*",
